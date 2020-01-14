@@ -38,37 +38,35 @@ var tokyo = {
   }
 };
 
-// function getDailySales(storeName) {
-//   var dailySales = [];
-//   for (var i=0; i<hours.length; i++) {
-//     var locationHourSales = storeName.getHourlySales(i);
-//     dailySales +=
-//     console.log(`${storeName.name} ${i} ${dailySales[i]}`);
-//   }
-//   return dailySales;
+// var locations = [seattle, tokyo];
+
+// function renderSales(locationName) {
+//   var locationID = document.getElementById(locationName.toString());
 // }
-
-// var locations = [seattle, tokyo, dubai, paris, lima];
-
-// function getAllLocationHourlySales() {
-//   for (var i=0; i<locations.length; i++) {
-//     getLocationHourlySales(locations[i]);
-//   }
-// }
-
-// getAllLocationHourlySales();
 
 var seattleHeader = document.getElementById('seattleHeader');
 seattleHeader.textContent = `${seattle.name} Sales:`;
 
-var i;
 var seattleUL = document.getElementById('seattleUL');
+var seattleHourSales = 0;
 var seattleHourlySales = [];
-for (i = 0; i< hours.length; i++) {
-  console.log('im looping');
+var seattleTotalSales = 0;
+for (var i = 0; i<hours.length; i++) {
   var seattleLI = document.createElement('li');
-  seattleHourlySales.push(seattle.getHourSales());
+  seattleHourSales = seattle.getHourSales();
+  seattleHourlySales.push(seattleHourSales);
+  seattleTotalSales += seattleHourSales;
   seattleLI.textContent = `${hours[i]} sales: ${seattle.getHourSales()} cookies`;
   seattleUL.appendChild(seattleLI);
-  console.log('ive looped');
 }
+
+var seattleTotalLI = document.createElement('li');
+seattleTotalLI.textContent = `Total daily sales: ${seattleTotalSales}`;
+seattleUL.appendChild(seattleTotalLI);
+
+// ## QUESTIONS ##
+// make getHourSales() global
+// how to create a reusable function from l.50-63?
+// related, possible to concatenate lookup for GEBI?
+// assigning new elements IDs via js
+// storing more permanent numbers from RNG
