@@ -1,29 +1,20 @@
 'use strict';
 
-
 function getRandom(max, min) {
-  return (Math.random() * (max - min)) + min;
+  return (Math.random() * (max - min) + min);
 }
+
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 var seattle = {
   name: 'Seattle',
   avgSale: 6.3,
   maxCust: 65,
   minCust: 23,
-  hours: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
-  getHourlySales: function(hourIndex){
-    var hourlyCust = [];
-    var hourlySales = [];
-    for (var i=0; i<this.hours.length; i++) {
-      var hourCust = getRandom(this.maxCust, this.minCust);
-      hourlyCust.push(hourCust);
-    }
-    for (var j=0; j<this.hours.length; j++) {
-      var hourSales = (hourlyCust[j] * this.avgSale);
-      hourlySales.push(hourSales);
-    }
-    console.log(`I am working! The hourlySales index is  ${hourlySales[hourIndex]}`);
-    return hourlySales[hourIndex];
+  getHourSales: function(){
+    var hourCust = getRandom(this.maxCust, this.minCust);
+    var hourSales = (hourCust * this.avgSale);
+    return Math.floor(hourSales);
   }
 };
 
@@ -32,106 +23,52 @@ var tokyo = {
   avgSale: 1.2,
   maxCust: 24,
   minCust: 3,
-  hours: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
   getHourlySales: function(hourIndex){
     var hourlyCust = [];
     var hourlySales = [];
-    for (var i=0; i<this.hours.length; i++) {
+    for (var i=0; i<hours.length; i++) {
       var hourCust = getRandom(this.maxCust, this.minCust);
       hourlyCust.push(hourCust);
     }
-    for (var j=0; j<this.hours.length; j++) {
+    for (var j=0; j<hours.length; j++) {
       var hourSales = (hourlyCust[j] * this.avgSale);
       hourlySales.push(hourSales);
     }
-    console.log(`I am working! The hourlySales index is  ${hourlySales[hourIndex]}`);
-    return hourlySales[hourIndex];
+    return Math.floor(hourlySales[hourIndex]);
   }
 };
 
-var dubai = {
-  name: 'Dubai',
-  avgSale: 3.7,
-  maxCust: 38,
-  minCust: 11,
-  hours: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
-  getHourlySales: function(hourIndex){
-    var hourlyCust = [];
-    var hourlySales = [];
-    for (var i=0; i<this.hours.length; i++) {
-      var hourCust = getRandom(this.maxCust, this.minCust);
-      hourlyCust.push(hourCust);
-    }
-    for (var j=0; j<this.hours.length; j++) {
-      var hourSales = (hourlyCust[j] * this.avgSale);
-      hourlySales.push(hourSales);
-    }
-    console.log(`I am working! The hourlySales index is  ${hourlySales[hourIndex]}`);
-    return hourlySales[hourIndex];
-  }
-};
+// function getDailySales(storeName) {
+//   var dailySales = [];
+//   for (var i=0; i<hours.length; i++) {
+//     var locationHourSales = storeName.getHourlySales(i);
+//     dailySales +=
+//     console.log(`${storeName.name} ${i} ${dailySales[i]}`);
+//   }
+//   return dailySales;
+// }
 
-var paris = {
-  name: 'Paris',
-  avgSale: 2.3,
-  maxCust: 38,
-  minCust: 20,
-  hours: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
-  getHourlySales: function(hourIndex){
-    var hourlyCust = [];
-    var hourlySales = [];
-    for (var i=0; i<this.hours.length; i++) {
-      var hourCust = getRandom(this.maxCust, this.minCust);
-      hourlyCust.push(hourCust);
-    }
-    for (var j=0; j<this.hours.length; j++) {
-      var hourSales = (hourlyCust[j] * this.avgSale);
-      hourlySales.push(hourSales);
-    }
-    console.log(`I am working! The hourlySales index is  ${hourlySales[hourIndex]}`);
-    return hourlySales[hourIndex];
-  }
-};
+// var locations = [seattle, tokyo, dubai, paris, lima];
 
-var lima = {
-  name: 'Lima',
-  avgSale: 4.6,
-  maxCust: 16,
-  minCust: 2,
-  hours: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
-  getHourlySales: function(hourIndex){
-    var hourlyCust = [];
-    var hourlySales = [];
-    for (var i=0; i<this.hours.length; i++) {
-      var hourCust = getRandom(this.maxCust, this.minCust);
-      hourlyCust.push(hourCust);
-    }
-    for (var j=0; j<this.hours.length; j++) {
-      var hourSales = (hourlyCust[j] * this.avgSale);
-      hourlySales.push(hourSales);
-    }
-    console.log(`I am working! The hourlySales index is  ${hourlySales[hourIndex]}`);
-    return hourlySales[hourIndex];
-  }
-};
+// function getAllLocationHourlySales() {
+//   for (var i=0; i<locations.length; i++) {
+//     getLocationHourlySales(locations[i]);
+//   }
+// }
 
-function getLocationHourlySales(objectName) {
-  var locationHourlySales = [];
-  for (var i=0; i<seattle.hours.length; i++) {
-    var locationHourSales = objectName.getHourlySales(i);
-    locationHourlySales.push(locationHourSales);
-    console.log(locationHourlySales[i]);
-  }
-  console.log(locationHourlySales);
-  return locationHourlySales;
+// getAllLocationHourlySales();
+
+var seattleHeader = document.getElementById('seattleHeader');
+seattleHeader.textContent = `${seattle.name} Sales:`;
+
+var i;
+var seattleUL = document.getElementById('seattleUL');
+var seattleHourlySales = [];
+for (i = 0; i< hours.length; i++) {
+  console.log('im looping');
+  var seattleLI = document.createElement('li');
+  seattleHourlySales.push(seattle.getHourSales());
+  seattleLI.textContent = `${hours[i]} sales: ${seattle.getHourSales()} cookies`;
+  seattleUL.appendChild(seattleLI);
+  console.log('ive looped');
 }
-
-var locations = [seattle, tokyo, dubai, paris, lima];
-
-function getAllLocationHourlySales() {
-  for (var i=0; i<locations.length; i++) {
-    getLocationHourlySales(locations[i]);
-  }
-}
-
-getAllLocationHourlySales();
