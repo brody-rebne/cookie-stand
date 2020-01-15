@@ -1,68 +1,117 @@
 'use strict';
 
+// rng function for generating random sales data
 function getRandom(max, min) {
   return (Math.random() * (max - min) + min);
 }
 
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
-var seattle = {
-  name: 'Seattle',
-  avgSale: 6.3,
-  maxCust: 65,
-  minCust: 23,
-  getHourSales: function(){
-    var hourCust = getRandom(this.maxCust, this.minCust);
-    var hourSales = (hourCust * this.avgSale);
-    return Math.floor(hourSales);
-  }
-};
-
-var tokyo = {
-  name: 'Tokyo',
-  avgSale: 1.2,
-  maxCust: 24,
-  minCust: 3,
-  getHourlySales: function(hourIndex){
-    var hourlyCust = [];
-    var hourlySales = [];
-    for (var i=0; i<hours.length; i++) {
-      var hourCust = getRandom(this.maxCust, this.minCust);
-      hourlyCust.push(hourCust);
-    }
-    for (var j=0; j<hours.length; j++) {
-      var hourSales = (hourlyCust[j] * this.avgSale);
-      hourlySales.push(hourSales);
-    }
-    return Math.floor(hourlySales[hourIndex]);
-  }
-};
-
-// var locations = [seattle, tokyo];
-
-// function renderSales(locationName) {
-//   var locationID = document.getElementById(locationName.toString());
+// function quickAppend(parent, child, type, content) {
+//   child = document.createElement(type);
+//   child.textcontent = content;
+//   parent.appendChild(child);
 // }
 
-var seattleHeader = document.getElementById('seattleHeader');
-seattleHeader.textContent = `${seattle.name} Sales:`;
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-var seattleUL = document.getElementById('seattleUL');
-var seattleHourSales = 0;
-var seattleHourlySales = [];
-var seattleTotalSales = 0;
-for (var i = 0; i<hours.length; i++) {
-  var seattleLI = document.createElement('li');
-  seattleHourSales = seattle.getHourSales();
-  seattleHourlySales.push(seattleHourSales);
-  seattleTotalSales += seattleHourSales;
-  seattleLI.textContent = `${hours[i]} sales: ${seattle.getHourSales()} cookies`;
-  seattleUL.appendChild(seattleLI);
+var locations = [];
+var grandTotalSales = 0;
+
+var salesTable = document.getElementById('salesTable');
+
+// constructor function for creating stores
+function Store(name, avgSale, maxCust, minCust) {
+  this.name = name;
+  this.avgSale = avgSale;
+  this.maxCust = maxCust;
+  this.minCust = minCust;
+  this.dailySales = 0;
+  this.hourlySales = [];
+  locations.push(this);
 }
 
-var seattleTotalLI = document.createElement('li');
-seattleTotalLI.textContent = `Total daily sales: ${seattleTotalSales}`;
-seattleUL.appendChild(seattleTotalLI);
+// generates array of random sales numbers
+Store.prototype.getRandomSales = function() {
+  for (var i=0; i<hours.length; i++) {
+    this.hourlySales.push(Math.floor(getRandom(this.maxCust, this.minCust) * this.avgSale));
+    this.dailySales += Math.floor(this.hourlySales[i]);
+  }
+};
+
+// renders the random sales numbers in the ui
+Store.prototype.renderSales = function() {
+  this.getRandomSales();
+  var row = document.createElement('tr');
+  salesTable.appendChild(row);
+  var storeCell = document.createElement('th');
+  storeCell.textContent = this.name;
+  row.appendChild(storeCell);
+  for(var i=0; i<this.hourlySales.length; i++) {
+    var hourlySalesCell = document.createElement('td');
+    hourlySalesCell.textContent = this.hourlySales[i];
+    row.appendChild(hourlySalesCell);
+  }
+  var storeTotalCell = document.createElement('th');
+  storeTotalCell.textContent = (this.dailySales);
+  row.appendChild(storeTotalCell);
+};
+
+// instantiating store objects
+var seattle = new Store('Seattle', 6.3, 65, 23);
+var tokyo = new Store('Tokyo', 1.2, 24, 3);
+var dubai = new Store('Dubai', 3.7, 38, 11);
+var paris = new Store('Paris', 2.3, 38, 20);
+var lima = new Store('Lima', 4.6, 16, 3);
+
+
+function renderHeader() {
+  var headerRow = document.createElement('tr');
+  salesTable.appendChild(headerRow);
+  var emptyCell = document.createElement('th');
+  headerRow.appendChild(emptyCell);
+  for(var i=0; i<hours.length; i++) {
+    var timeCell = document.createElement('th');
+    timeCell.textContent = hours[i];
+    headerRow.appendChild(timeCell);
+  }
+  var storeTotalHeaderCell = document.createElement('th');
+  storeTotalHeaderCell.textContent = ('TOTAL');
+  headerRow.appendChild(storeTotalHeaderCell);
+}
+
+function renderBody() {
+  for(var i=0; i<locations.length; i++) {
+    locations[i].renderSales();
+  }
+}
+
+function renderFooter() {
+  var footerRow = document.createElement('tfoot');
+  var emptyCell = document.createElement('th');
+  footerRow.appendChild(emptyCell);
+  var hourlyStoreTotal = 0;
+  for (var i=0; i<hours.length; i++) {
+    hourlyStoreTotal = 0;
+    for(var j=0; j<locations.length; j++) {
+      hourlyStoreTotal += locations[j].hourlySales[i];
+      grandTotalSales += locations[j].hourlySales[i];
+    }
+    var hourlyTotalCell = document.createElement('th');
+    hourlyTotalCell.textContent = (hourlyStoreTotal);
+    footerRow.appendChild(hourlyTotalCell);
+  }
+  var grandTotalCell = document.createElement('th');
+  grandTotalCell.textContent = grandTotalSales;
+  footerRow.appendChild(grandTotalCell);
+  salesTable.appendChild(footerRow);
+}
+
+function renderTable() {
+  renderHeader();
+  renderBody();
+  renderFooter();
+}
+
+renderTable();
 
 // ## QUESTIONS ##
 // make getHourSales() global
