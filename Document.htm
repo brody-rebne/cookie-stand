@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  
+  
+<link rel="stylesheet" type="text/css" href="./Document_files/reset.css"><link rel="stylesheet" type="text/css" href="./Document_files/style.css"></head>
+<body>
+  <header>
+    <img src="./Document_files/ddd" id="logo">
+    <nav>
+      <ul>
+        <li><a href="http://127.0.0.1:5500/index.html" class="menuItem">Nav Item 1</a></li>
+        <li><a href="http://127.0.0.1:5500/index.html" class="menuItem">Nav Item 2</a></li>
+        <li><a href="http://127.0.0.1:5500/index.html" class="menuItem">Nav Item 3</a></li>
+        <li><a href="http://127.0.0.1:5500/index.html" class="menuItem">Nav Item 4</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <img src="./Document_files/ddd(1)" id="coverPhoto">
+    <section id="banner">
+      <img src="./Document_files/ddd(2)" class="bannerImg">
+      <img src="./Document_files/ddd(2)" class="bannerImg">
+      <img src="./Document_files/ddd(2)" class="bannerImg">
+    </section>
+    <section id="featured">
+      <img src="./Document_files/ddd(3)" class="featuredImg">
+      <article id="callToActionBox">
+        <h3 id="featuredHeader">Featured Section Heading</h3>
+        <p id="featuredText">Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
+        <a href="http://127.0.0.1:5500/index.html" id="callToActionButton">Call to Action</a>
+      </article>
+    </section>
+  </main>
+  <footer>
+  </footer>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body></html>
