@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pat's Salmon Cookies | Sales</title>
-  <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <link rel="stylesheet" type="text/css" href="styles/sales.css">
   <link rel="icon" type="image/png" href="resources/salmon.png">
 </head>
 <body>
@@ -13,8 +13,34 @@
     <h1>Pat's Cookies Sales Data</h1>
   </header>
   <main>
-    <table id="salesTable">
-    </table>
+    <section id="forms">
+      <form id='locationForm'>
+        <fieldset>
+          <legend>Add a New Location:</legend>
+          <div>
+            <label>City</label>
+            <input name="name" type="text" required="required" placeholder="Location's city">
+          </div>
+          <div>
+            <label>Avg Sale</label>
+            <input name="avgSale" type="number" required="required" placeholder="Average cookies sold per customer">
+          </div>
+          <div>
+            <label>C/H Max</label>
+            <input name="maxCust" type="number" required="required" placeholder="Maximum customers per hour">
+          </div>
+          <div>
+            <label>C/H Min</label>
+            <input name="minCust" type="number" required="required" placeholder="Minimum customers per hour">
+          </div>
+          <button type="submit">Submit Location</button>
+        </fieldset>
+      </form>
+
+    </section>
+    <section>
+      <article id=tableArticle></article>
+    </section>
   </main>
   <script src='app.js' type='text/javascript'></script>
 </body>

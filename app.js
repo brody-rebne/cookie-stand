@@ -16,7 +16,11 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 var locations = [];
 var grandTotalSales = 0;
 
-var salesTable = document.getElementById('salesTable');
+var tableArticle = document.getElementById('tableArticle');
+var salesTable = document.createElement('table');
+tableArticle.appendChild(salesTable);
+var tableBody = document.createElement('tbody');
+var footerRow = document.createElement('tfoot');
 
 // constructor function for creating stores
 function Store(name, avgSale, maxCust, minCust) {
@@ -41,7 +45,7 @@ Store.prototype.getRandomSales = function() {
 Store.prototype.renderSales = function() {
   this.getRandomSales();
   var row = document.createElement('tr');
-  salesTable.appendChild(row);
+  tableBody.appendChild(row);
   var storeCell = document.createElement('th');
   storeCell.textContent = this.name;
   row.appendChild(storeCell);
@@ -79,13 +83,17 @@ function renderHeader() {
 }
 
 function renderBody() {
+  salesTable.appendChild(tableBody);
   for(var i=0; i<locations.length; i++) {
     locations[i].renderSales();
   }
 }
 
 function renderFooter() {
-  var footerRow = document.createElement('tfoot');
+  while (footerRow.firstChild) {
+    footerRow.removeChild(footerRow.firstChild);
+  }
+  grandTotalSales = 0;
   var emptyCell = document.createElement('th');
   footerRow.appendChild(emptyCell);
   var hourlyStoreTotal = 0;
@@ -104,6 +112,26 @@ function renderFooter() {
   footerRow.appendChild(grandTotalCell);
   salesTable.appendChild(footerRow);
 }
+
+var locationForm = document.getElementById('locationForm');
+
+locationForm.addEventListener('submit', function submitLocation(event) {
+  event.preventDefault();
+  var name = event.target.name.value;
+  var avgSale = event.target.avgSale.value;
+  var maxCust = event.target.maxCust.value;
+  var minCust = event.target.minCust.value;
+
+  var newLocation = new Store(name, avgSale, maxCust, minCust);
+  newLocation.renderSales();
+
+  renderFooter();
+
+  event.target.name.value = null;
+  event.target.avgSale.value = null;
+  event.target.maxCust.value = null;
+  event.target.minCust.value = null;
+});
 
 function renderTable() {
   renderHeader();
