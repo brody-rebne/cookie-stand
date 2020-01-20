@@ -48,6 +48,15 @@ h1 {
   color: #2b411c;
 }
 
+h2 {
+  margin: 0;
+  margin-bottom: 20px;
+  font-family: 'IM Fell Great Primer SC', serif;
+  font-size: 36pt;
+  color: #2b411c;
+  text-align: center;
+}
+
 h3 {
   margin: 0;
   font-family: 'IM Fell Great Primer SC', serif;
@@ -84,6 +93,7 @@ main p {
   font-size: 14pt;
 }
 
+
 #flavors div {
   display: inline-block;
   width: 47%;
@@ -95,6 +105,7 @@ main p {
 
 #flavors h3 {
   margin: 15px 0;
+  font-size: 24pt;
   text-align: center;
 }
 
@@ -105,10 +116,6 @@ main p {
 #process img {
   width: 32%;
   vertical-align: middle;
-}
-
-#process h3 {
-  text-align: center;
 }
 
 #shop>* {
