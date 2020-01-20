@@ -2,7 +2,7 @@
 
 // rng function for generating random sales data
 function getRandom(max, min) {
-  return (Math.random() * (max - min) + min);
+  return Math.random() * (max - min) + min;
 }
 
 // function quickAppend(parent, child, type, content) {
@@ -13,14 +13,20 @@ function getRandom(max, min) {
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-var locations = [];
+var stores = [];
 var grandTotalSales = 0;
 
 var tableArticle = document.getElementById('tableArticle');
 var salesTable = document.createElement('table');
 tableArticle.appendChild(salesTable);
+var tableHeader = document.createElement('thead');
+salesTable.appendChild(tableHeader);
+var headerRow = document.createElement('tr');
 var tableBody = document.createElement('tbody');
-var footerRow = document.createElement('tfoot');
+salesTable.appendChild(tableBody);
+var tableFooter = document.createElement('tfoot');
+salesTable.appendChild(tableFooter);
+var footerRow = document.createElement('tr');
 
 // constructor function for creating stores
 function Store(name, avgSale, maxCust, minCust) {
@@ -30,7 +36,7 @@ function Store(name, avgSale, maxCust, minCust) {
   this.minCust = minCust;
   this.dailySales = 0;
   this.hourlySales = [];
-  locations.push(this);
+  stores.push(this);
 }
 
 // generates array of random sales numbers
@@ -60,16 +66,15 @@ Store.prototype.renderSales = function() {
 };
 
 // instantiating store objects
-var seattle = new Store('Seattle', 6.3, 65, 23);
-var tokyo = new Store('Tokyo', 1.2, 24, 3);
-var dubai = new Store('Dubai', 3.7, 38, 11);
-var paris = new Store('Paris', 2.3, 38, 20);
-var lima = new Store('Lima', 4.6, 16, 3);
+new Store('Seattle', 6.3, 65, 23);
+new Store('Tokyo', 1.2, 24, 3);
+new Store('Dubai', 3.7, 38, 11);
+new Store('Paris', 2.3, 38, 20);
+new Store('Lima', 4.6, 16, 3);
+
 
 
 function renderHeader() {
-  var headerRow = document.createElement('tr');
-  salesTable.appendChild(headerRow);
   var emptyCell = document.createElement('th');
   headerRow.appendChild(emptyCell);
   for(var i=0; i<hours.length; i++) {
@@ -80,12 +85,12 @@ function renderHeader() {
   var storeTotalHeaderCell = document.createElement('th');
   storeTotalHeaderCell.textContent = ('TOTAL');
   headerRow.appendChild(storeTotalHeaderCell);
+  tableHeader.appendChild(headerRow);
 }
 
 function renderBody() {
-  salesTable.appendChild(tableBody);
-  for(var i=0; i<locations.length; i++) {
-    locations[i].renderSales();
+  for(var i=0; i<stores.length; i++) {
+    stores[i].renderSales();
   }
 }
 
@@ -99,9 +104,9 @@ function renderFooter() {
   var hourlyStoreTotal = 0;
   for (var i=0; i<hours.length; i++) {
     hourlyStoreTotal = 0;
-    for(var j=0; j<locations.length; j++) {
-      hourlyStoreTotal += locations[j].hourlySales[i];
-      grandTotalSales += locations[j].hourlySales[i];
+    for(var j=0; j<stores.length; j++) {
+      hourlyStoreTotal += stores[j].hourlySales[i];
+      grandTotalSales += stores[j].hourlySales[i];
     }
     var hourlyTotalCell = document.createElement('th');
     hourlyTotalCell.textContent = (hourlyStoreTotal);
@@ -110,7 +115,7 @@ function renderFooter() {
   var grandTotalCell = document.createElement('th');
   grandTotalCell.textContent = grandTotalSales;
   footerRow.appendChild(grandTotalCell);
-  salesTable.appendChild(footerRow);
+  tableFooter.appendChild(footerRow);
 }
 
 var locationForm = document.getElementById('locationForm');
@@ -142,8 +147,4 @@ function renderTable() {
 renderTable();
 
 // ## QUESTIONS ##
-// make getHourSales() global
-// how to create a reusable function from l.50-63?
-// related, possible to concatenate lookup for GEBI?
-// assigning new elements IDs via js
-// storing more permanent numbers from RNG
+// possible to concatenate lookup for GEBI?
