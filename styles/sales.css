@@ -1,9 +1,27 @@
-table {
-  text-align: center;
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-tr th, tr td {
-  border-bottom: 1px solid #000;
+table {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+tr * {
+  padding: 10px 7px;
+}
+
+th {
+  background: #1464F4;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  color: #fff;;
+}
+
+td {
+  border-bottom: 3px solid #1464F4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10pt;
 }
 
 #forms {
