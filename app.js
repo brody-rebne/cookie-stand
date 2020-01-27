@@ -5,14 +5,7 @@ function getRandom(max, min) {
   return Math.random() * (max - min) + min;
 }
 
-// function quickAppend(parent, child, type, content) {
-//   child = document.createElement(type);
-//   child.textcontent = content;
-//   parent.appendChild(child);
-// }
-
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
 var stores = [];
 var grandTotalSales = 0;
 
@@ -72,8 +65,6 @@ new Store('Dubai', 3.7, 38, 11);
 new Store('Paris', 2.3, 38, 20);
 new Store('Lima', 4.6, 16, 3);
 
-
-
 function renderHeader() {
   var emptyCell = document.createElement('th');
   headerRow.appendChild(emptyCell);
@@ -123,6 +114,8 @@ var locationForm = document.getElementById('locationForm');
 locationForm.addEventListener('submit', function submitLocation(event) {
   event.preventDefault();
   var name = event.target.name.value;
+  console.log(event.target.id);
+  console.log(event.target.avgSale.value);
   var avgSale = event.target.avgSale.value;
   var maxCust = event.target.maxCust.value;
   var minCust = event.target.minCust.value;
@@ -145,6 +138,3 @@ function renderTable() {
 }
 
 renderTable();
-
-// ## QUESTIONS ##
-// possible to concatenate lookup for GEBI?
